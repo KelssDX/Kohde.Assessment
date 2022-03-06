@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Kohde.Assessment
@@ -13,10 +14,12 @@ namespace Kohde.Assessment
 
         public void PerformSomeLongRunningOperation()
         {
-            foreach (var i in Enumerable.Range(1, 10))
-            {
+            //using Enumerable Reapeat function instead of foreach loop 
+            Enumerable.Repeat(10, 10).Where(x => {
                 this.SomethingHappened += HandleSomethingHappened;
-            }
+                return true;
+            }).ToList();
+            
         }
 
         public void RaiseEvent(string data)
@@ -26,7 +29,7 @@ namespace Kohde.Assessment
                 this.SomethingHappened(data);
             }
         }
-
+        
         private void HandleSomethingHappened(string foo)
         {
             this.Counter = this.Counter + 1;
